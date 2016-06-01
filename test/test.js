@@ -33,4 +33,18 @@ describe ('Test', () => {
     })
     door.getState().should.deep.equal(doors)
   })
+
+  it ('visit coutinously', () => {
+    door.visitEach(1)
+    door.visitEach(2)
+
+    const doors = Door.makeDoors(DOOR_COUNT, DOOR_STATE.OPEN)
+    doors.forEach((door, index) => {
+      if ((index+1) % 2 === 0) {
+        door.state = Door.toggle(door.state)
+      }
+    })
+
+    door.getState().should.deep.equal(doors)
+  })
 })
