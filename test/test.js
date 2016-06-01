@@ -47,4 +47,19 @@ describe ('Test', () => {
 
     door.getState().should.deep.equal(doors)
   })
+
+  it ('visit to count continuously', () => {
+    for (let i = 1; i <= DOOR_COUNT; ++i) {
+      door.visitEach(i)
+    }
+
+    const doors = Door.makeDoors(DOOR_COUNT)
+    doors.forEach((door, index) => {
+      if (Number.isInteger(Math.sqrt(index+1))) {
+        door.state = DOOR_STATE.OPEN
+      }
+    })
+
+    door.getState().should.deep.equal(doors)
+  })
 })
